@@ -19,7 +19,8 @@ for line in lines:
 	if(line == ""):
 		continue
 
-	line = re.sub(r'([\u0900-\u097F ])([.?!])\s*(?=[\u0900-\u097FA-Za-z])', r"\1\2\n", line)
+	#line = re.sub(r'([\u0900-\u097F ])([.?!])\s*(?=[\u0900-\u097FA-Za-z])', r"\1\2\n", line)
+	line = re.sub(r'([\u0900-\u097F ])([?!])\s*(?=[\u0900-\u097FA-Za-z])', r"\1\2\n", line)
 	line = re.sub(r'[\u0964]\s*', "\u0964\n", line)
 
 	seg_template = "\"SEG" + "{0:03}".format(i) +"\""
