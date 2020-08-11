@@ -7,8 +7,14 @@ fp1 = open(sys.argv[1], "r", encoding='utf-8') # Open file on read mode -- input
 lines = fp1.read().split("\n") # Create a list containing all lines
 fp1.close() # Close file
 
+#open file using open file mode
+outfile = re.sub(r'.txt','_template.txt', sys.argv[1])
+fp2 = open(outfile, "w", encoding='utf-8') # Open file on write mode -- extra file
+
+
 i = 1
 out = []
+extra = []
 for line in lines:
 
 
@@ -36,3 +42,10 @@ for line in lines:
 o = '\n'.join([str(elem) for elem in out]) 
 o = re.sub(r'\n\n','\n', o)
 print(o)
+
+out = o.split("\n")
+for l in out:
+	if(re.search(r'SEG', l, flags=re.IGNORECASE)):
+		fp2.write(l + "\n")
+	else:
+		fp2.write('\n')
