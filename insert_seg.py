@@ -25,9 +25,11 @@ for line in lines:
 	if(line == ""):
 		continue
 
-	#line = re.sub(r'([\u0900-\u097F ])([.?!])\s*(?=[\u0900-\u097FA-Za-z])', r"\1\2\n", line)
 	line = re.sub(r'([\u0900-\u097F ])([?!])\s*(?=[\u0900-\u097FA-Za-z])', r"\1\2\n", line)
+	line = re.sub(r'([\u0964])([\)\'\"])', r"\1PLACEHOLDER1\2", line)
 	line = re.sub(r'[\u0964]\s*', "\u0964\n", line)
+
+	line = re.sub(r'\nPLACEHOLDER1', '', line)
 
 	seg_template = "\"SEG" + "{0:03}".format(i) +"\""
 	i = i + 1
@@ -46,6 +48,8 @@ print(o)
 out = o.split("\n")
 for l in out:
 	if(re.search(r'SEG', l, flags=re.IGNORECASE)):
+		fp2.write(l + "\n")
+	elif(re.search(r'^[^\u0900-\u097F]+$', l )):
 		fp2.write(l + "\n")
 	else:
 		fp2.write('\n')
