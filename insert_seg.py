@@ -31,7 +31,7 @@ for line in lines:
 
 	line = re.sub(r'\nPLACEHOLDER1', '', line)
 
-	seg_template = "\"SEG" + "{0:03}".format(i) +"\""
+	seg_template = "\"#SEG" + "{0:03}".format(i) +"\""
 	i = i + 1
 
 	line = re.sub(r'\n\n','\n', line)
